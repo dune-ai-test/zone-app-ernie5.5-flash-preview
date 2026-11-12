@@ -1,0 +1,22 @@
+# Android / Gradle
+*.iml
+.gradle/
+build/
+app/build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+
+# IDE
+.idea/
+*.apk
+*.aab
+*.keystore
+!debug.keystore
+
+# macOS
+.DS_Store
+
+# Reference web app (not part of this repository)
+/zone/
