@@ -665,6 +665,12 @@ private fun updateStatus(item: WatchItem, status: String, context: android.conte
     saveWatch(nextItem, "Status updated", context)
 }
 
+private fun toggleFavorite(item: WatchItem, context: android.content.Context) {
+    val next = Zone.watchlist.value.map { if (it.id == item.id) it.copy(favorite = !it.favorite) else it }
+    Zone.setWatchlist(next, if (item.favorite) "Removed from favorites" else "Added to favorites", "edit", audit = false)
+    toast(context, if (item.favorite) "Removed from favorites." else "Added to favorites.")
+}
+
 private fun saveWatch(item: WatchItem, title: String, context: android.content.Context) {
     Zone.setWatchlist(Zone.watchlist.value.map { if (it.id == item.id) item else it }, title, "edit", audit = false)
     toast(context, "Saved.")
