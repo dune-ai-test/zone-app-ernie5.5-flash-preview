@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -79,7 +79,7 @@ fun SplitScreen() {
             item {
                 ScreenHeader(
                     title = "Split",
-                    subtitle = "${groups.size} tables · ${Zone.money(total)} shared",
+                    subtitle = "${groups.size} tables Â· ${Zone.money(total)} shared",
                     action = {
                         Surface(
                             onClick = {
@@ -140,7 +140,7 @@ fun SplitScreen() {
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(group.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                                 Text(
-                                    "${group.members.size} people · ${group.expenses.size} entries",
+                                    "${group.members.size} people Â· ${group.expenses.size} entries",
                                     style = MaterialTheme.typography.labelSmall,
                                     color = ZoneColors.secondary
                                 )
@@ -156,7 +156,7 @@ fun SplitScreen() {
                         }
                         Spacer(Modifier.height(8.dp))
                         Text(
-                            group.members.joinToString(" · ") { it.name },
+                            group.members.joinToString(" Â· ") { it.name },
                             style = MaterialTheme.typography.labelSmall,
                             color = ZoneColors.secondary,
                             maxLines = 1,
@@ -358,7 +358,7 @@ private fun GroupDetail(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(group.name, style = MaterialTheme.typography.headlineMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     Text(
-                        "${group.members.size} people · ${group.expenses.size} entries",
+                        "${group.members.size} people Â· ${group.expenses.size} entries",
                         style = MaterialTheme.typography.labelSmall,
                         color = ZoneColors.secondary
                     )
@@ -377,7 +377,7 @@ private fun GroupDetail(
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 StatTile("Total shared", Zone.money(balance.total), "Non-settlement costs", Modifier.weight(1f))
-                StatTile("Your position", if (youNet > 0.005) "+${Zone.money(youNet)}" else if (youNet < -0.005) "−${Zone.money(-youNet)}" else "Even", "Member named \"you\"", Modifier.weight(1f))
+                StatTile("Your position", if (youNet > 0.005) "+${Zone.money(youNet)}" else if (youNet < -0.005) "âˆ’${Zone.money(-youNet)}" else "Even", "Member named \"you\"", Modifier.weight(1f))
                 StatTile("Open to settle", if (plan.isNotEmpty()) Zone.money(plan.sumOf { it.amount }) else "Settled", "${plan.size} transfers", Modifier.weight(1f))
             }
         }
@@ -406,7 +406,7 @@ private fun GroupDetail(
                         ) {
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(
-                                    "${memberName(group, transfer.from)} → ${memberName(group, transfer.to)}",
+                                    "${memberName(group, transfer.from)} â†’ ${memberName(group, transfer.to)}",
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                                 Text(Zone.money(transfer.amount), style = MaterialTheme.typography.titleMedium, color = ZoneColors.orange)
@@ -438,7 +438,7 @@ private fun GroupDetail(
                         selected = false,
                         onClick = {},
                         label = {
-                            Text("${member.name} · ${if (net > 0.005) "+" else if (net < -0.005) "−" else ""}${Zone.money(kotlin.math.abs(net))}")
+                            Text("${member.name} Â· ${if (net > 0.005) "+" else if (net < -0.005) "âˆ’" else ""}${Zone.money(kotlin.math.abs(net))}")
                         }
                     )
                 }
@@ -512,7 +512,7 @@ private fun GroupDetail(
                     Column(modifier = Modifier.weight(1f)) {
                         Text(expense.description.ifBlank { "Shared cost" }, style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
                         Text(
-                            "${splitCategoryLabels[expense.category] ?: expense.category} · paid by $payer · ${Zone.medium(expense.date)}",
+                            "${splitCategoryLabels[expense.category] ?: expense.category} Â· paid by $payer Â· ${Zone.medium(expense.date)}",
                             style = MaterialTheme.typography.labelSmall,
                             color = ZoneColors.secondary,
                             maxLines = 1,
@@ -588,7 +588,7 @@ private fun ExpenseEditor(
             }
         }
     ) {
-        LabeledField("Description", description, { description = it }, placeholder = "Groceries, taxi, dinner…")
+        LabeledField("Description", description, { description = it }, placeholder = "Groceries, taxi, dinnerâ€¦")
         LabeledField("Amount", amount, { amount = it.filter { c -> c.isDigit() || c == '.' } }, placeholder = "0", keyboardType = KeyboardType.Number)
         LabeledField("Date", Zone.medium(date), {}, modifier = Modifier.fillMaxWidth(), readOnly = true)
         TextButton(onClick = { showDatePicker(context, Zone.parseDate(date) ?: Zone.today()) { date = it.toString() } }) {
@@ -701,7 +701,7 @@ private fun settle(group: SplitGroup, transfer: Transfer, context: android.conte
     val toName = memberName(group, transfer.to)
     val expense = Expense(
         id = Zone.uid("gx"),
-        description = "Settlement — $fromName to $toName",
+        description = "Settlement â€” $fromName to $toName",
         amount = transfer.amount,
         paidBy = transfer.from,
         date = Zone.todayISO(),

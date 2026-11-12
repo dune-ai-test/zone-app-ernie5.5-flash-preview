@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -84,7 +84,7 @@ fun PassbookScreen() {
         item {
             ScreenHeader(
                 title = "Passbook",
-                subtitle = "${book.accounts.size} accounts · ${Zone.money(total)}",
+                subtitle = "${book.accounts.size} accounts Â· ${Zone.money(total)}",
                 action = {
                     Row {
                         IconButton(onClick = {
@@ -126,7 +126,7 @@ fun PassbookScreen() {
                 item {
                     AccountCard(
                         title = "All accounts",
-                        subtitle = "${book.accounts.size} accounts · ${book.transactions.size} entries",
+                        subtitle = "${book.accounts.size} accounts Â· ${book.transactions.size} entries",
                         balance = total,
                         active = selectedAccount == "all",
                         onClick = { selectedAccount = "all" }
@@ -135,7 +135,7 @@ fun PassbookScreen() {
                 items(book.accounts) { account ->
                     AccountCard(
                         title = account.name,
-                        subtitle = "${account.type} · ${account.number.ifBlank { "No number" }}",
+                        subtitle = "${account.type} Â· ${account.number.ifBlank { "No number" }}",
                         balance = accountBalance(book, account),
                         active = selectedAccount == account.id,
                         onClick = { selectedAccount = account.id }
@@ -172,7 +172,7 @@ fun PassbookScreen() {
                     }
                     Column(modifier = Modifier.weight(1f)) {
                         Text("Money out", style = MaterialTheme.typography.labelSmall, color = ZoneColors.secondary)
-                        Text("−" + Zone.money(moneyOut), style = MaterialTheme.typography.titleMedium, color = ZoneColors.red)
+                        Text("âˆ’" + Zone.money(moneyOut), style = MaterialTheme.typography.titleMedium, color = ZoneColors.red)
                     }
                     Column(modifier = Modifier.weight(1f)) {
                         Text("Net", style = MaterialTheme.typography.labelSmall, color = ZoneColors.secondary)
@@ -258,14 +258,14 @@ fun PassbookScreen() {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(txn.description.ifBlank { txn.category }, style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
                             Text(
-                                "${if (txn.type == "deposit") "Deposit" else "Withdrawal"} · ${txn.category} · ${account?.name ?: "Unknown"}",
+                                "${if (txn.type == "deposit") "Deposit" else "Withdrawal"} Â· ${txn.category} Â· ${account?.name ?: "Unknown"}",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = ZoneColors.secondary
                             )
                         }
                         Column(horizontalAlignment = Alignment.End) {
                             Text(
-                                (if (txn.type == "deposit") "+" else "−") + Zone.money(txn.amount),
+                                (if (txn.type == "deposit") "+" else "âˆ’") + Zone.money(txn.amount),
                                 style = MaterialTheme.typography.titleMedium,
                                 color = if (txn.type == "deposit") ZoneColors.green else ZoneColors.red
                             )
@@ -453,7 +453,7 @@ private fun AccountEditor(
                 FilterChip(selected = type == option, onClick = { type = option }, label = { Text(option) })
             }
         }
-        LabeledField("Account number (optional)", number, { number = it }, placeholder = "•••• 1234")
+        LabeledField("Account number (optional)", number, { number = it }, placeholder = "â€¢â€¢â€¢â€¢ 1234")
         LabeledField("Opening balance", opening, { opening = it.filter { c -> c.isDigit() || c == '.' } }, placeholder = "0", keyboardType = androidx.compose.ui.text.input.KeyboardType.Number)
         if (initial != null) {
             TextButton(onClick = onDelete) { Text("Remove account", color = ZoneColors.red) }
@@ -553,7 +553,7 @@ private fun passbookCsv(book: PassbookData, txns: List<PassTxn>): String {
     val rows = mutableListOf(listOf("Date", "Account", "Description", "Category", "Type", "Amount", "Currency"))
     txns.sortedBy { it.date }.forEach { txn ->
         val account = book.accounts.firstOrNull { it.id == txn.accountId }
-        rows.add(listOf(txn.date, account?.name ?: "", txn.description, txn.category, txn.type, txn.amount.toInt().toString(), Zone.settings.currency))
+        rows.add(listOf(txn.date, account?.name ?: "", txn.description, txn.category, txn.type, txn.amount.toInt().toString(), Zone.settings.value.currency))
     }
     return csv(rows)
 }

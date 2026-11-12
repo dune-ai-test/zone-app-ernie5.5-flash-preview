@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -141,7 +141,7 @@ fun ZoneTheme(
 @Composable
 fun resolvedDark(): Boolean {
     val system = isSystemInDarkTheme()
-    return when (Zone.settings.theme) {
+    return when (Zone.settings.value.theme) {
         "light" -> false
         "dark" -> true
         else -> system

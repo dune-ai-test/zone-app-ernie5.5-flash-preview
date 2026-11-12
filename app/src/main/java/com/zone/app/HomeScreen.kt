@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -128,7 +128,7 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
         ToolCardData("links", "Links", "A shelf for good corners of the web", "${links.size} saved"),
         ToolCardData("subscriptions", "Subscriptions", "The quiet monthly cost of it all", "${Zone.money(monthlyBurn)}/mo"),
         ToolCardData("admin", "Review desk", "Approvals, audit trail, backups", "${Zone.audit.value.count { it.status == "pending" }} pending"),
-        ToolCardData("settings", "Settings", "Appearance and display currency", Zone.settings.currency)
+        ToolCardData("settings", "Settings", "Appearance and display currency", Zone.settings.value.currency)
     )
 
     val filtered = if (query.isBlank()) tools else tools.filter {
@@ -142,7 +142,7 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
         item {
             ScreenHeader(
                 title = "Zone",
-                subtitle = "$greeting · ${Zone.medium(today)}"
+                subtitle = "$greeting Â· ${Zone.medium(today)}"
             )
         }
 
@@ -162,7 +162,7 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
                 StatTile(
                     label = "Diary streak",
                     value = "$streak days",
-                    hint = "${diary.size} entries · ${Zone.num(words)} words",
+                    hint = "${diary.size} entries Â· ${Zone.num(words)} words",
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -287,7 +287,7 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
                 EmptyState(
                     icon = Icons.Default.CalendarMonth,
                     title = "Nothing found",
-                    message = "Try a different word — diary, money, mileage.",
+                    message = "Try a different word â€” diary, money, mileage.",
                     modifier = Modifier.padding(horizontal = 20.dp, vertical = 18.dp)
                 )
             }

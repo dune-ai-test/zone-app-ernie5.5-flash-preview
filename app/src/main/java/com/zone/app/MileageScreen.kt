@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -88,7 +88,7 @@ fun MileageScreen() {
         item {
             ScreenHeader(
                 title = "Mileage",
-                subtitle = "${trips.size} fills · ${vehicles.size} vehicles",
+                subtitle = "${trips.size} fills Â· ${vehicles.size} vehicles",
                 action = {
                     Row {
                         IconButton(onClick = { showVehicle = true }) {
@@ -181,7 +181,7 @@ fun MileageScreen() {
                                 Column(modifier = Modifier.weight(1f)) {
                                     Text(vehicle.name, style = MaterialTheme.typography.titleMedium)
                                     Text(
-                                        "${vehicle.type} · ${vehicle.fuel} · ${vehicleTrips.size} fills · ${"%.1f".format(vehicleAvg)} km/l",
+                                        "${vehicle.type} Â· ${vehicle.fuel} Â· ${vehicleTrips.size} fills Â· ${"%.1f".format(vehicleAvg)} km/l",
                                         style = MaterialTheme.typography.labelSmall,
                                         color = ZoneColors.secondary
                                     )
@@ -239,12 +239,12 @@ fun MileageScreen() {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                "${trip.vehicle} · ${Zone.medium(trip.date)}",
+                                "${trip.vehicle} Â· ${Zone.medium(trip.date)}",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = ZoneColors.secondary
                             )
                             Text(
-                                "${trip.start.toInt()} → ${trip.end.toInt()} km",
+                                "${trip.start.toInt()} â†’ ${trip.end.toInt()} km",
                                 style = MaterialTheme.typography.bodyLarge
                             )
                             if (trip.note.isNotBlank()) {
@@ -419,7 +419,7 @@ private fun GaugeCard(
         }
         Spacer(Modifier.height(4.dp))
         Text(
-            if (latestDistance > 0) "This fill · ${"%.0f".format(latestDistance)} km on ${"%.2f".format(latestLitres)} L" else "No complete tank yet",
+            if (latestDistance > 0) "This fill Â· ${"%.0f".format(latestDistance)} km on ${"%.2f".format(latestLitres)} L" else "No complete tank yet",
             style = MaterialTheme.typography.labelSmall,
             color = ZoneColors.secondary
         )
@@ -478,7 +478,7 @@ private fun TripEditor(
             }
         }
     ) {
-        LabeledField("Vehicle", vehicle, { vehicle = it }, placeholder = "Car, bike, scooter…")
+        LabeledField("Vehicle", vehicle, { vehicle = it }, placeholder = "Car, bike, scooterâ€¦")
         LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             items(vehicles) { item ->
                 FilterChip(selected = vehicle.equals(item.name, ignoreCase = true), onClick = { vehicle = item.name }, label = { Text(item.name) })
@@ -589,7 +589,7 @@ private fun mileageCsv(
                 stats.litres.toString(),
                 stats.mileage.toString(),
                 stats.costPerKm.toString(),
-                Zone.settings.currency,
+                Zone.settings.value.currency,
                 trip.note
             )
         )

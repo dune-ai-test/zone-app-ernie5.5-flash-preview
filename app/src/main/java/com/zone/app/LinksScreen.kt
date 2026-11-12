@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -76,7 +76,7 @@ fun LinksScreen() {
         item {
             ScreenHeader(
                 title = "Links",
-                subtitle = "${links.size} corners · ${allTags.size} subjects",
+                subtitle = "${links.size} corners Â· ${allTags.size} subjects",
                 action = {
                     Surface(
                         onClick = {
@@ -144,7 +144,7 @@ fun LinksScreen() {
                     .padding(horizontal = 20.dp, vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                listOf("newest" to "Newest", "oldest" to "Oldest", "title" to "A–Z", "domain" to "Domain").forEach { (value, label) ->
+                listOf("newest" to "Newest", "oldest" to "Oldest", "title" to "Aâ€“Z", "domain" to "Domain").forEach { (value, label) ->
                     item {
                         FilterChip(selected = sort == value, onClick = { sort = value }, label = { Text(label) })
                     }

@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -86,7 +86,7 @@ fun NotesScreen() {
         item {
             ScreenHeader(
                 title = "Notes",
-                subtitle = "${notes.size} notes · ${notes.count { it.pinned }} pinned",
+                subtitle = "${notes.size} notes Â· ${notes.count { it.pinned }} pinned",
                 action = {
                     Surface(
                         onClick = {
@@ -392,7 +392,7 @@ private fun NoteViewer(
             Column {
                 Text(note.title, style = MaterialTheme.typography.titleLarge)
                 Text(
-                    "${Zone.medium(note.updated)} · ${noteColorLabels[note.color] ?: "Plain"} paper · ${Zone.words(note.body)} words",
+                    "${Zone.medium(note.updated)} Â· ${noteColorLabels[note.color] ?: "Plain"} paper Â· ${Zone.words(note.body)} words",
                     style = MaterialTheme.typography.labelSmall,
                     color = ZoneColors.secondary
                 )
@@ -422,11 +422,11 @@ private fun NoteViewer(
 }
 
 private fun notesMarkdown(notes: List<NoteItem>): String {
-    val lines = mutableListOf("# Zone notebook", "", "Exported ${Zone.medium(Zone.todayISO())} · ${notes.size} notes", "")
+    val lines = mutableListOf("# Zone notebook", "", "Exported ${Zone.medium(Zone.todayISO())} Â· ${notes.size} notes", "")
     notes.sortedWith(compareByDescending<NoteItem> { it.pinned }.thenByDescending { it.updated }).forEach { note ->
         lines.add("## ${note.title}")
         lines.add("")
-        lines.add("_${Zone.medium(note.updated)} · ${noteColorLabels[note.color] ?: "Plain"} paper${if (note.pinned) " · pinned" else ""}_")
+        lines.add("_${Zone.medium(note.updated)} Â· ${noteColorLabels[note.color] ?: "Plain"} paper${if (note.pinned) " Â· pinned" else ""}_")
         lines.add("")
         lines.add(note.body.trim().ifEmpty { "_(No words yet.)_" })
         lines.add("")

@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -102,7 +102,7 @@ fun DiaryScreen() {
         item {
             ScreenHeader(
                 title = "Diary",
-                subtitle = "${entries.size} pages · $streak day streak",
+                subtitle = "${entries.size} pages Â· $streak day streak",
                 action = {
                     Surface(
                         onClick = {
@@ -298,7 +298,7 @@ private fun DiaryCard(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    Zone.parseDate(entry.date)?.dayOfMonth?.toString() ?: "—",
+                    Zone.parseDate(entry.date)?.dayOfMonth?.toString() ?: "â€”",
                     style = MaterialTheme.typography.titleLarge,
                     color = color
                 )
@@ -402,7 +402,7 @@ private fun DiaryEditor(
                 date.isBlank() -> error = "Choose a valid date."
                 date > Zone.todayISO() -> error = "Choose today or an earlier day."
                 cleanTitle.isEmpty() -> error = "Give the day a title."
-                cleanBody.isEmpty() -> error = "Write something — even a single line."
+                cleanBody.isEmpty() -> error = "Write something â€” even a single line."
                 else -> {
                     val cleanTags = tags.split(",")
                         .map { it.trim().removePrefix("#").trim() }
@@ -460,7 +460,7 @@ private fun bestStreak(entries: List<DiaryEntry>): Int {
 
 private fun entryText(entry: DiaryEntry): String {
     val tags = if (entry.tags.isNotEmpty()) "\n\n" + entry.tags.joinToString(" ") { "#$it" } else ""
-    return "${entry.title}\n${Zone.medium(entry.date)} · ${moodLabels[moodOf(entry.mood)]}\n\n${entry.body}$tags"
+    return "${entry.title}\n${Zone.medium(entry.date)} Â· ${moodLabels[moodOf(entry.mood)]}\n\n${entry.body}$tags"
 }
 
 private fun diaryCsv(entries: List<DiaryEntry>): String {

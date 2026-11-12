@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import android.content.ClipData
 import android.content.ClipboardManager

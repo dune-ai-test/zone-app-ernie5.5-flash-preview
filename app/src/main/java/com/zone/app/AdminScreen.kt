@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -203,7 +203,7 @@ private fun AuditCard(
             Column(modifier = Modifier.weight(1f)) {
                 Text(event.title, style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 Text(
-                    "${event.action} · ${Zone.medium(event.at.take(10))} · ${event.source}",
+                    "${event.action} Â· ${Zone.medium(event.at.take(10))} Â· ${event.source}",
                     style = MaterialTheme.typography.labelSmall,
                     color = ZoneColors.secondary
                 )
@@ -263,7 +263,7 @@ private fun auditReport(events: List<AuditEvent>): String {
         ""
     )
     events.forEach { event ->
-        lines.add("${Zone.medium(event.at.take(10))} · ${event.status.uppercase()} · ${event.toolLabel()} · ${event.title}")
+        lines.add("${Zone.medium(event.at.take(10))} Â· ${event.status.uppercase()} Â· ${event.toolLabel()} Â· ${event.title}")
         if (event.detail.isNotBlank()) lines.add("  ${event.detail}")
         lines.add("")
     }

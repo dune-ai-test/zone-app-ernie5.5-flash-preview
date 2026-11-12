@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -83,7 +83,7 @@ fun HabitsScreen() {
         item {
             ScreenHeader(
                 title = "Habits",
-                subtitle = "${habits.size} habits · $doneToday done today",
+                subtitle = "${habits.size} habits Â· $doneToday done today",
                 action = {
                     Surface(
                         onClick = {
@@ -131,7 +131,7 @@ fun HabitsScreen() {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        "${Zone.short(week.first())} – ${Zone.short(week.last())}",
+                        "${Zone.short(week.first())} â€“ ${Zone.short(week.last())}",
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
@@ -278,7 +278,7 @@ private fun HabitCard(
             Column(modifier = Modifier.weight(1f)) {
                 Text(habit.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 Text(
-                    "$checkedThisWeek of ${habit.target} this week${if (streak > 0) " · $streak day streak" else ""}",
+                    "$checkedThisWeek of ${habit.target} this week${if (streak > 0) " Â· $streak day streak" else ""}",
                     style = MaterialTheme.typography.labelSmall,
                     color = ZoneColors.secondary
                 )
@@ -365,8 +365,8 @@ private fun HabitEditor(
             )
         }
     ) {
-        LabeledField("Habit", name, { name = it }, placeholder = "Read, walk, stretch…")
-        LabeledField("Target per week (1–7)", target, { target = it.filter { c -> c.isDigit() } }, keyboardType = androidx.compose.ui.text.input.KeyboardType.Number)
+        LabeledField("Habit", name, { name = it }, placeholder = "Read, walk, stretchâ€¦")
+        LabeledField("Target per week (1â€“7)", target, { target = it.filter { c -> c.isDigit() } }, keyboardType = androidx.compose.ui.text.input.KeyboardType.Number)
         if (error.isNotEmpty()) {
             Text(error, color = ZoneColors.red, style = MaterialTheme.typography.labelMedium)
         }

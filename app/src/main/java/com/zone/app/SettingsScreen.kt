@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -35,7 +35,7 @@ private val currencies = listOf("INR", "USD", "EUR", "GBP", "AED", "AUD", "CAD",
 @Composable
 fun SettingsScreen() {
     val context = LocalContext.current
-    val settings = Zone.settings
+    val settings = Zone.settings.value
 
     val importLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
@@ -48,7 +48,7 @@ fun SettingsScreen() {
                 val count = Zone.importBackup(text)
                 toast(
                     context,
-                    if (count > 0) "Backup imported — $count sections restored." else "That file is not a valid Zone backup."
+                    if (count > 0) "Backup imported â€” $count sections restored." else "That file is not a valid Zone backup."
                 )
             } else {
                 toast(context, "Could not read that file.")
@@ -139,7 +139,7 @@ fun SettingsScreen() {
                                 Text(currency, style = MaterialTheme.typography.bodyLarge)
                                 Text(
                                     when (currency) {
-                                        "INR" -> "Indian rupee · en-IN"
+                                        "INR" -> "Indian rupee Â· en-IN"
                                         "USD" -> "US dollar"
                                         "EUR" -> "Euro"
                                         "GBP" -> "Pound sterling"

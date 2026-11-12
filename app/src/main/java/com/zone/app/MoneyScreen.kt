@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -106,7 +106,7 @@ fun MoneyScreen() {
         item {
             ScreenHeader(
                 title = "Money",
-                subtitle = "${Zone.monthLabel(month, long = true)} · ${monthTxns.size} entries",
+                subtitle = "${Zone.monthLabel(month, long = true)} Â· ${monthTxns.size} entries",
                 action = {
                     Surface(
                         onClick = {
@@ -158,7 +158,7 @@ fun MoneyScreen() {
                 StatTile("Spent", Zone.money(spent), "${monthTxns.count { it.type == "expense" }} expenses", Modifier.weight(1f))
                 StatTile("Income", Zone.money(earned), "${monthTxns.count { it.type == "income" }} deposits", Modifier.weight(1f))
                 StatTile("Kept", Zone.money(net), if (earned > 0) "${(net / earned * 100).toInt()}% of income" else "No income", Modifier.weight(1f))
-                StatTile("Budget left", if (budget > 0) Zone.money(remaining) else "—", if (budget > 0) "${(spent / budget * 100).toInt()}% used" else "No envelope", Modifier.weight(1f))
+                StatTile("Budget left", if (budget > 0) Zone.money(remaining) else "â€”", if (budget > 0) "${(spent / budget * 100).toInt()}% used" else "No envelope", Modifier.weight(1f))
             }
         }
 
@@ -180,7 +180,7 @@ fun MoneyScreen() {
                 ZoneProgressBar(budgetPct, color = if (spent > budget && budget > 0) ZoneColors.red else ZoneColors.blue)
                 Spacer(Modifier.height(6.dp))
                 Text(
-                    if (budget > 0) "${Zone.money(spent)} of ${Zone.money(budget)} · ${if (remaining < 0) "${Zone.money(-remaining)} over" else "${Zone.money(remaining)} left"}" else "Set a monthly envelope to read the pace.",
+                    if (budget > 0) "${Zone.money(spent)} of ${Zone.money(budget)} Â· ${if (remaining < 0) "${Zone.money(-remaining)} over" else "${Zone.money(remaining)} left"}" else "Set a monthly envelope to read the pace.",
                     style = MaterialTheme.typography.labelSmall,
                     color = if (remaining < 0 && budget > 0) ZoneColors.red else ZoneColors.secondary
                 )
@@ -278,10 +278,10 @@ fun MoneyScreen() {
                             Spacer(Modifier.width(10.dp))
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(txn.note.ifBlank { txn.category }, style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                                Text("${txn.category} · ${if (txn.type == "income") "Income" else "Expense"}", style = MaterialTheme.typography.labelSmall, color = ZoneColors.secondary)
+                                Text("${txn.category} Â· ${if (txn.type == "income") "Income" else "Expense"}", style = MaterialTheme.typography.labelSmall, color = ZoneColors.secondary)
                             }
                             Text(
-                                (if (txn.type == "income") "+" else "−") + Zone.money(txn.amount),
+                                (if (txn.type == "income") "+" else "âˆ’") + Zone.money(txn.amount),
                                 style = MaterialTheme.typography.titleMedium,
                                 color = if (txn.type == "income") ZoneColors.green else ZoneColors.red
                             )
@@ -444,7 +444,7 @@ private fun shiftMonth(month: String, delta: Int): String {
 private fun moneyCsv(txns: List<Txn>): String {
     val rows = mutableListOf(listOf("Date", "Type", "Category", "Amount", "Currency", "Note"))
     txns.sortedBy { it.date }.forEach { txn ->
-        rows.add(listOf(txn.date, txn.type, txn.category, txn.amount.toInt().toString(), Zone.settings.currency, txn.note))
+        rows.add(listOf(txn.date, txn.type, txn.category, txn.amount.toInt().toString(), Zone.settings.value.currency, txn.note))
     }
     return csv(rows)
 }

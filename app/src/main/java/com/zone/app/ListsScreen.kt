@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -80,7 +80,7 @@ fun ListsScreen() {
             item {
                 ScreenHeader(
                     title = "Lists",
-                    subtitle = "${lists.size} lists · ${openItems(lists)} open",
+                    subtitle = "${lists.size} lists Â· ${openItems(lists)} open",
                     action = {
                         Surface(
                             onClick = {
@@ -152,7 +152,7 @@ fun ListsScreen() {
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(list.title.ifBlank { "Untitled list" }, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                                 Text(
-                                    "${progress.first} of ${progress.second} done · ${progress.third} open",
+                                    "${progress.first} of ${progress.second} done Â· ${progress.third} open",
                                     style = MaterialTheme.typography.labelSmall,
                                     color = ZoneColors.secondary
                                 )
@@ -305,7 +305,7 @@ private fun ListDetail(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(list.title.ifBlank { "Untitled list" }, style = MaterialTheme.typography.headlineMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     Text(
-                        "${progress.first} of ${progress.second} done · ${progress.fourth}%",
+                        "${progress.first} of ${progress.second} done Â· ${progress.fourth}%",
                         style = MaterialTheme.typography.labelSmall,
                         color = ZoneColors.secondary
                     )
@@ -324,7 +324,7 @@ private fun ListDetail(
                 ZoneProgressBar(progress.fourth / 100f)
                 Spacer(Modifier.height(5.dp))
                 Text(
-                    if (progress.third == 0) "Everything is crossed off." else "${progress.third} open · ${progress.second - progress.first} remaining",
+                    if (progress.third == 0) "Everything is crossed off." else "${progress.third} open Â· ${progress.second - progress.first} remaining",
                     style = MaterialTheme.typography.labelSmall,
                     color = ZoneColors.secondary
                 )
@@ -343,7 +343,7 @@ private fun ListDetail(
                     itemText,
                     { itemText = it },
                     modifier = Modifier.weight(1f),
-                    placeholder = "Add a line to this list…"
+                    placeholder = "Add a line to this listâ€¦"
                 )
                 Spacer(Modifier.width(8.dp))
                 PrimaryButton(
@@ -496,7 +496,7 @@ private fun ListDetail(
                             stepText,
                             { stepText = it },
                             modifier = Modifier.weight(1f),
-                            placeholder = "A smaller step…"
+                            placeholder = "A smaller stepâ€¦"
                         )
                         Spacer(Modifier.width(8.dp))
                         PrimaryButton(

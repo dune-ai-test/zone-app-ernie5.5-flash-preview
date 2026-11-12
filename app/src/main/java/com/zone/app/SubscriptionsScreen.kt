@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -97,7 +97,7 @@ fun SubscriptionsScreen() {
         item {
             ScreenHeader(
                 title = "Subscriptions",
-                subtitle = "${active.size} active · ${Zone.money(monthly)}/month",
+                subtitle = "${active.size} active Â· ${Zone.money(monthly)}/month",
                 action = {
                     Surface(
                         onClick = {
@@ -147,7 +147,7 @@ fun SubscriptionsScreen() {
                 }
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    if (active.isEmpty()) "Nothing active yet." else "${active.size} active · ${subs.size - active.size} paused",
+                    if (active.isEmpty()) "Nothing active yet." else "${active.size} active Â· ${subs.size - active.size} paused",
                     style = MaterialTheme.typography.labelSmall,
                     color = ZoneColors.secondary
                 )
@@ -164,7 +164,7 @@ fun SubscriptionsScreen() {
                 StatTile("Active", "${active.size}", "${subs.size - active.size} paused", Modifier.weight(1f))
                 StatTile("Due in 7 days", Zone.money(dueSoon), "Raw amounts due", Modifier.weight(1f))
                 StatTile("Average", Zone.money(avg), "Per active service", Modifier.weight(1f))
-                StatTile("Biggest", biggest?.first ?: "—", biggest?.let { "${Zone.money(it.second)}/mo" } ?: "No split", Modifier.weight(1f))
+                StatTile("Biggest", biggest?.first ?: "â€”", biggest?.let { "${Zone.money(it.second)}/mo" } ?: "No split", Modifier.weight(1f))
             }
         }
 
@@ -195,7 +195,7 @@ fun SubscriptionsScreen() {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Column(modifier = Modifier.weight(1f)) {
                                     Text(sub.name, style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                                    Text("${sub.cycle} · ${sub.category}", style = MaterialTheme.typography.labelSmall, color = ZoneColors.secondary)
+                                    Text("${sub.cycle} Â· ${sub.category}", style = MaterialTheme.typography.labelSmall, color = ZoneColors.secondary)
                                 }
                                 Column(horizontalAlignment = Alignment.End) {
                                     Text(Zone.money(sub.amount), style = MaterialTheme.typography.bodyLarge)
@@ -231,7 +231,7 @@ fun SubscriptionsScreen() {
                         FilterChip(selected = statusFilter == value, onClick = { statusFilter = value }, label = { Text(label) })
                     }
                 }
-                listOf("next" to "Next", "monthly" to "Monthly", "name" to "A–Z").forEach { (value, label) ->
+                listOf("next" to "Next", "monthly" to "Monthly", "name" to "Aâ€“Z").forEach { (value, label) ->
                     item {
                         FilterChip(selected = sort == value, onClick = { sort = value }, label = { Text(label) })
                     }
@@ -285,7 +285,7 @@ fun SubscriptionsScreen() {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(sub.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                             Text(
-                                "${sub.cycle} · ${sub.category}${if (sub.status == "Paused") " · paused" else ""}",
+                                "${sub.cycle} Â· ${sub.category}${if (sub.status == "Paused") " Â· paused" else ""}",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = if (sub.status == "Paused") ZoneColors.secondary else ZoneColors.blue
                             )
@@ -415,7 +415,7 @@ private fun SubscriptionEditor(
             )
         }
     ) {
-        LabeledField("Service", name, { name = it }, placeholder = "Streaming, software, storage…")
+        LabeledField("Service", name, { name = it }, placeholder = "Streaming, software, storageâ€¦")
         LabeledField("Amount", amount, { amount = it.filter { c -> c.isDigit() || c == '.' } }, placeholder = "0", keyboardType = KeyboardType.Number)
         Text("Cycle", style = MaterialTheme.typography.labelSmall, color = ZoneColors.secondary)
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -440,7 +440,7 @@ private fun SubscriptionEditor(
             }
         }
         Text(
-            if (preview != null && preview > 0) "Monthly share: ${Zone.money(preview)}" else "Monthly share: —",
+            if (preview != null && preview > 0) "Monthly share: ${Zone.money(preview)}" else "Monthly share: â€”",
             style = MaterialTheme.typography.labelSmall,
             color = ZoneColors.secondary
         )
@@ -482,7 +482,7 @@ private fun subscriptionsCsv(subs: List<Subscription>): String {
                 sub.category,
                 sub.status,
                 monthlyOf(sub).toString(),
-                Zone.settings.currency
+                Zone.settings.value.currency
             )
         )
     }

@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -269,68 +269,53 @@ object Zone {
 
     private lateinit var prefs: SharedPreferences
 
-    var settings by mutableStateOf(Settings())
-        private set
+    val settings = mutableStateOf(Settings())
 
-    var diary by mutableStateOf<List<DiaryEntry>>(emptyList())
-        private set
+    val diary = mutableStateOf<List<DiaryEntry>>(emptyList())
 
-    var lists by mutableStateOf<List<CheckList>>(emptyList())
-        private set
+    val lists = mutableStateOf<List<CheckList>>(emptyList())
 
-    var habits by mutableStateOf<HabitsData>(HabitsData())
-        private set
+    val habits = mutableStateOf<HabitsData>(HabitsData())
 
-    var notes by mutableStateOf<List<NoteItem>>(emptyList())
-        private set
+    val notes = mutableStateOf<List<NoteItem>>(emptyList())
 
-    var moneyData by mutableStateOf<MoneyData>(MoneyData())
-        private set
+    val moneyData = mutableStateOf<MoneyData>(MoneyData())
 
-    var passbook by mutableStateOf<PassbookData>(PassbookData())
-        private set
+    val passbook = mutableStateOf<PassbookData>(PassbookData())
 
-    var split by mutableStateOf<SplitData>(SplitData())
-        private set
+    val split = mutableStateOf<SplitData>(SplitData())
 
-    var trips by mutableStateOf<List<Trip>>(emptyList())
-        private set
+    val trips = mutableStateOf<List<Trip>>(emptyList())
 
-    var vehicles by mutableStateOf<List<Vehicle>>(emptyList())
-        private set
+    val vehicles = mutableStateOf<List<Vehicle>>(emptyList())
 
-    var watchlist by mutableStateOf<List<WatchItem>>(emptyList())
-        private set
+    val watchlist = mutableStateOf<List<WatchItem>>(emptyList())
 
-    var links by mutableStateOf<List<LinkItem>>(emptyList())
-        private set
+    val links = mutableStateOf<List<LinkItem>>(emptyList())
 
-    var subscriptions by mutableStateOf<List<Subscription>>(emptyList())
-        private set
+    val subscriptions = mutableStateOf<List<Subscription>>(emptyList())
 
-    var admin by mutableStateOf<AdminData>(AdminData())
-        private set
+    val admin = mutableStateOf<AdminData>(AdminData())
 
-    var audit by mutableStateOf<List<AuditEvent>>(emptyList())
-        private set
+    val audit = mutableStateOf<List<AuditEvent>>(emptyList())
 
     fun init(context: Context) {
         prefs = context.applicationContext.getSharedPreferences("zone.v1", Context.MODE_PRIVATE)
-        settings = read("settings", Settings())
-        diary = read("diary", emptyList())
-        lists = read("lists", emptyList())
-        habits = read("habits", HabitsData())
-        notes = read("notes", emptyList())
-        moneyData = read("money", MoneyData())
-        passbook = read("passbook", PassbookData())
-        split = read("split", SplitData())
-        trips = read("trips", emptyList())
-        vehicles = read("vehicles", emptyList())
-        watchlist = read("watchlist", emptyList())
-        links = read("links", emptyList())
-        subscriptions = read("subscriptions", emptyList())
-        admin = read("admin", AdminData())
-        audit = read("audit", emptyList())
+        settings.value = read("settings", Settings())
+        diary.value = read("diary", emptyList())
+        lists.value = read("lists", emptyList())
+        habits.value = read("habits", HabitsData())
+        notes.value = read("notes", emptyList())
+        moneyData.value = read("money", MoneyData())
+        passbook.value = read("passbook", PassbookData())
+        split.value = read("split", SplitData())
+        trips.value = read("trips", emptyList())
+        vehicles.value = read("vehicles", emptyList())
+        watchlist.value = read("watchlist", emptyList())
+        links.value = read("links", emptyList())
+        subscriptions.value = read("subscriptions", emptyList())
+        admin.value = read("admin", AdminData())
+        audit.value = read("audit", emptyList())
     }
 
     private inline fun <reified T> read(key: String, fallback: T): T {
@@ -445,20 +430,20 @@ object Zone {
         if (raw.isBlank()) return false
         return try {
             when (section) {
-                "diary" -> diary = json.decodeFromString<List<DiaryEntry>>(raw).also { write("diary", it) }
-                "lists" -> lists = json.decodeFromString<List<CheckList>>(raw).also { write("lists", it) }
-                "habits" -> habits = json.decodeFromString<HabitsData>(raw).also { write("habits", it) }
-                "notes" -> notes = json.decodeFromString<List<NoteItem>>(raw).also { write("notes", it) }
-                "money" -> moneyData = json.decodeFromString<MoneyData>(raw).also { write("money", it) }
-                "passbook" -> passbook = json.decodeFromString<PassbookData>(raw).also { write("passbook", it) }
-                "split" -> split = json.decodeFromString<SplitData>(raw).also { write("split", it) }
-                "trips" -> trips = json.decodeFromString<List<Trip>>(raw).also { write("trips", it) }
-                "vehicles" -> vehicles = json.decodeFromString<List<Vehicle>>(raw).also { write("vehicles", it) }
-                "watchlist" -> watchlist = json.decodeFromString<List<WatchItem>>(raw).also { write("watchlist", it) }
-                "links" -> links = json.decodeFromString<List<LinkItem>>(raw).also { write("links", it) }
-                "subscriptions" -> subscriptions = json.decodeFromString<List<Subscription>>(raw).also { write("subscriptions", it) }
-                "settings" -> settings = json.decodeFromString<Settings>(raw).also { write("settings", it) }
-                "admin" -> admin = json.decodeFromString<AdminData>(raw).also { write("admin", it) }
+                "diary" -> diary.value = json.decodeFromString<List<DiaryEntry>>(raw).also { write("diary", it) }
+                "lists" -> lists.value = json.decodeFromString<List<CheckList>>(raw).also { write("lists", it) }
+                "habits" -> habits.value = json.decodeFromString<HabitsData>(raw).also { write("habits", it) }
+                "notes" -> notes.value = json.decodeFromString<List<NoteItem>>(raw).also { write("notes", it) }
+                "money" -> moneyData.value = json.decodeFromString<MoneyData>(raw).also { write("money", it) }
+                "passbook" -> passbook.value = json.decodeFromString<PassbookData>(raw).also { write("passbook", it) }
+                "split" -> split.value = json.decodeFromString<SplitData>(raw).also { write("split", it) }
+                "trips" -> trips.value = json.decodeFromString<List<Trip>>(raw).also { write("trips", it) }
+                "vehicles" -> vehicles.value = json.decodeFromString<List<Vehicle>>(raw).also { write("vehicles", it) }
+                "watchlist" -> watchlist.value = json.decodeFromString<List<WatchItem>>(raw).also { write("watchlist", it) }
+                "links" -> links.value = json.decodeFromString<List<LinkItem>>(raw).also { write("links", it) }
+                "subscriptions" -> subscriptions.value = json.decodeFromString<List<Subscription>>(raw).also { write("subscriptions", it) }
+                "settings" -> settings.value = json.decodeFromString<Settings>(raw).also { write("settings", it) }
+                "admin" -> admin.value = json.decodeFromString<AdminData>(raw).also { write("admin", it) }
                 else -> return false
             }
             true
@@ -473,98 +458,98 @@ object Zone {
 
     fun setDiary(list: List<DiaryEntry>, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(diary.value) else ""
-        diary = list
+        diary.value = list
         write("diary", list)
         if (audit) record("diary", title, action, before, encode(list))
     }
 
     fun setLists(list: List<CheckList>, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(lists.value) else ""
-        lists = list
+        lists.value = list
         write("lists", list)
         if (audit) record("lists", title, action, before, encode(list))
     }
 
     fun setHabits(data: HabitsData, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(habits.value) else ""
-        habits = data
+        habits.value = data
         write("habits", data)
         if (audit) record("habits", title, action, before, encode(data))
     }
 
     fun setNotes(list: List<NoteItem>, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(notes.value) else ""
-        notes = list
+        notes.value = list
         write("notes", list)
         if (audit) record("notes", title, action, before, encode(list))
     }
 
     fun setMoney(data: MoneyData, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(moneyData.value) else ""
-        moneyData = data
+        moneyData.value = data
         write("money", data)
         if (audit) record("money", title, action, before, encode(data))
     }
 
     fun setPassbook(data: PassbookData, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(passbook.value) else ""
-        passbook = data
+        passbook.value = data
         write("passbook", data)
         if (audit) record("passbook", title, action, before, encode(data))
     }
 
     fun setSplit(data: SplitData, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(split.value) else ""
-        split = data
+        split.value = data
         write("split", data)
         if (audit) record("split", title, action, before, encode(data))
     }
 
     fun setTrips(list: List<Trip>, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(trips.value) else ""
-        trips = list
+        trips.value = list
         write("trips", list)
         if (audit) record("trips", title, action, before, encode(list))
     }
 
     fun setVehicles(list: List<Vehicle>, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(vehicles.value) else ""
-        vehicles = list
+        vehicles.value = list
         write("vehicles", list)
         if (audit) record("vehicles", title, action, before, encode(list))
     }
 
     fun setWatchlist(list: List<WatchItem>, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(watchlist.value) else ""
-        watchlist = list
+        watchlist.value = list
         write("watchlist", list)
         if (audit) record("watchlist", title, action, before, encode(list))
     }
 
     fun setLinks(list: List<LinkItem>, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(links.value) else ""
-        links = list
+        links.value = list
         write("links", list)
         if (audit) record("links", title, action, before, encode(list))
     }
 
     fun setSubscriptions(list: List<Subscription>, title: String, action: String, audit: Boolean = true) {
         val before = if (audit) encode(subscriptions.value) else ""
-        subscriptions = list
+        subscriptions.value = list
         write("subscriptions", list)
         if (audit) record("subscriptions", title, action, before, encode(list))
     }
 
     fun setSettings(next: Settings, title: String = "Settings updated", action: String = "edit") {
-        val before = encode(settings)
-        settings = next
+        val before = encode(settings.value)
+        settings.value = next
         write("settings", next)
         record("settings", title, action, before, encode(next))
     }
 
     fun setAdmin(data: AdminData, title: String, action: String) {
         val before = encode(admin.value)
-        admin = data
+        admin.value = data
         write("admin", data)
         record("admin", title, action, before, encode(data), "admin")
     }
@@ -575,7 +560,7 @@ object Zone {
 
     fun backupJson(): String {
         val data = buildJsonObject {
-            put("settings", json.parseToJsonElement(encode(settings)))
+            put("settings", json.parseToJsonElement(encode(settings.value)))
             put("diary", json.parseToJsonElement(encode(diary.value)))
             put("lists", json.parseToJsonElement(encode(lists.value)))
             put("habits", json.parseToJsonElement(encode(habits.value)))
@@ -609,46 +594,46 @@ object Zone {
         var count = 0
 
         readSection<Settings>(data, "settings")?.let {
-            settings = it; write("settings", it); count++
+            settings.value = it; write("settings", it); count++
         }
         readSection<List<DiaryEntry>>(data, "diary")?.let {
-            diary = it; write("diary", it); count++
+            diary.value = it; write("diary", it); count++
         }
         readSection<List<CheckList>>(data, "lists")?.let {
-            lists = it; write("lists", it); count++
+            lists.value = it; write("lists", it); count++
         }
         readSection<HabitsData>(data, "habits")?.let {
-            habits = it; write("habits", it); count++
+            habits.value = it; write("habits", it); count++
         }
         readSection<List<NoteItem>>(data, "notes")?.let {
-            notes = it; write("notes", it); count++
+            notes.value = it; write("notes", it); count++
         }
         readSection<MoneyData>(data, "money")?.let {
-            moneyData = it; write("money", it); count++
+            moneyData.value = it; write("money", it); count++
         }
         readSection<PassbookData>(data, "passbook")?.let {
-            passbook = it; write("passbook", it); count++
+            passbook.value = it; write("passbook", it); count++
         }
         readSection<SplitData>(data, "split")?.let {
-            split = it; write("split", it); count++
+            split.value = it; write("split", it); count++
         }
         readSection<List<Trip>>(data, "trips")?.let {
-            trips = it; write("trips", it); count++
+            trips.value = it; write("trips", it); count++
         }
         readSection<List<Vehicle>>(data, "vehicles")?.let {
-            vehicles = it; write("vehicles", it); count++
+            vehicles.value = it; write("vehicles", it); count++
         }
         readSection<List<WatchItem>>(data, "watchlist")?.let {
-            watchlist = it; write("watchlist", it); count++
+            watchlist.value = it; write("watchlist", it); count++
         }
         readSection<List<LinkItem>>(data, "links")?.let {
-            links = it; write("links", it); count++
+            links.value = it; write("links", it); count++
         }
         readSection<List<Subscription>>(data, "subscriptions")?.let {
-            subscriptions = it; write("subscriptions", it); count++
+            subscriptions.value = it; write("subscriptions", it); count++
         }
         readSection<AdminData>(data, "admin")?.let {
-            admin = it; write("admin", it); count++
+            admin.value = it; write("admin", it); count++
         }
 
         if (count > 0) {
@@ -748,20 +733,20 @@ object Zone {
 
     fun currentMonth(): String = todayISO().take(7)
 
-    fun currencySymbol(): String = when (settings.currency) {
+    fun currencySymbol(): String = when (settings.value.currency) {
         "USD" -> "$"
-        "EUR" -> "€"
-        "GBP" -> "£"
-        "INR" -> "₹"
+        "EUR" -> "â‚¬"
+        "GBP" -> "Â£"
+        "INR" -> "â‚¹"
         "AED" -> "AED "
         "AUD" -> "A$"
         "CAD" -> "C$"
         "SGD" -> "S$"
-        else -> settings.currency
+        else -> settings.value.currency
     }
 
     fun money(amount: Number, decimals: Int = 0): String {
-        val locale = when (settings.currency) {
+        val locale = when (settings.value.currency) {
             "USD" -> Locale.US
             "EUR" -> Locale.GERMANY
             "GBP" -> Locale.UK
@@ -773,17 +758,17 @@ object Zone {
         }
         return try {
             val format = NumberFormat.getCurrencyInstance(locale)
-            format.currency = Currency.getInstance(settings.currency)
+            format.currency = Currency.getInstance(settings.value.currency)
             format.minimumFractionDigits = decimals
             format.maximumFractionDigits = decimals
             format.format(amount)
         } catch (e: Exception) {
-            "${settings.currency} ${"%,.${decimals}f".format(amount)}"
+            "${settings.value.currency} ${"%,.${decimals}f".format(amount)}"
         }
     }
 
     fun num(amount: Number, decimals: Int = 0): String {
-        val locale = if (settings.currency == "INR") Locale("en", "IN") else Locale.US
+        val locale = if (settings.value.currency == "INR") Locale("en", "IN") else Locale.US
         val format = NumberFormat.getInstance(locale)
         format.minimumFractionDigits = decimals
         format.maximumFractionDigits = decimals

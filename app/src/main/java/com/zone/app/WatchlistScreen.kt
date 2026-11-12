@@ -1,4 +1,4 @@
-package com.zone.app
+﻿package com.zone.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -85,7 +85,7 @@ fun WatchlistScreen() {
         item {
             ScreenHeader(
                 title = "Watchlist",
-                subtitle = "${items.size} titles · ${queued.size} waiting · ${watching.size} in rotation",
+                subtitle = "${items.size} titles Â· ${queued.size} waiting Â· ${watching.size} in rotation",
                 action = {
                     Surface(
                         onClick = {
@@ -114,7 +114,7 @@ fun WatchlistScreen() {
                 StatTile("In queue", "${queued.size}", "Waiting to start", Modifier.weight(1f))
                 StatTile("In rotation", "${watching.size}", "Currently watching", Modifier.weight(1f))
                 StatTile("Finished", "${finished.size}", "${if (items.isNotEmpty()) finished.size * 100 / items.size else 0}% of shelf", Modifier.weight(1f))
-                StatTile("Avg rating", if (avgRating > 0) "${"%.1f".format(avgRating)}" else "—", "Out of 10", Modifier.weight(1f))
+                StatTile("Avg rating", if (avgRating > 0) "${"%.1f".format(avgRating)}" else "â€”", "Out of 10", Modifier.weight(1f))
             }
         }
 
@@ -134,12 +134,12 @@ fun WatchlistScreen() {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(pick.title, style = MaterialTheme.typography.titleLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
                             Text(
-                                "${pick.type}${pick.year?.let { " · $it" } ?: ""}${if (pick.genre.isNotBlank()) " · ${pick.genre}" else ""}",
+                                "${pick.type}${pick.year?.let { " Â· $it" } ?: ""}${if (pick.genre.isNotBlank()) " Â· ${pick.genre}" else ""}",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = ZoneColors.secondary
                             )
                             Text(
-                                "Added ${Zone.rel(pick.added)}${if (pick.service.isNotBlank()) " · ${pick.service}" else ""}",
+                                "Added ${Zone.rel(pick.added)}${if (pick.service.isNotBlank()) " Â· ${pick.service}" else ""}",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = ZoneColors.secondary
                             )
@@ -336,7 +336,7 @@ private fun WatchCard(
                     }
                 }
                 Text(
-                    "${item.type}${item.year?.let { " · $it" } ?: ""}${if (item.genre.isNotBlank()) " · ${item.genre}" else ""}",
+                    "${item.type}${item.year?.let { " Â· $it" } ?: ""}${if (item.genre.isNotBlank()) " Â· ${item.genre}" else ""}",
                     style = MaterialTheme.typography.labelSmall,
                     color = ZoneColors.secondary,
                     maxLines = 1,
@@ -402,7 +402,7 @@ private fun WatchDetail(
             Column {
                 Text(item.title, style = MaterialTheme.typography.titleLarge)
                 Text(
-                    "${item.type}${item.year?.let { " · $it" } ?: ""}${if (item.genre.isNotBlank()) " · ${item.genre}" else ""}",
+                    "${item.type}${item.year?.let { " Â· $it" } ?: ""}${if (item.genre.isNotBlank()) " Â· ${item.genre}" else ""}",
                     style = MaterialTheme.typography.labelSmall,
                     color = ZoneColors.secondary
                 )
@@ -413,7 +413,7 @@ private fun WatchDetail(
                 if (total > 0) {
                     ZoneProgressBar(if (total > 0) watched.toFloat() / total else 0f)
                     Spacer(Modifier.height(4.dp))
-                    Text("$watched of $total episodes · ${item.status}", style = MaterialTheme.typography.labelSmall, color = ZoneColors.secondary)
+                    Text("$watched of $total episodes Â· ${item.status}", style = MaterialTheme.typography.labelSmall, color = ZoneColors.secondary)
                 }
                 if (item.service.isNotBlank()) {
                     Spacer(Modifier.height(8.dp))
@@ -524,7 +524,7 @@ private fun WatchEditor(
             }
         )
         LabeledField("Year", year, { year = it.filter { c -> c.isDigit() } }, placeholder = "2024", keyboardType = KeyboardType.Number)
-        LabeledField("Genre", genre, { genre = it }, placeholder = "Drama, documentary…")
+        LabeledField("Genre", genre, { genre = it }, placeholder = "Drama, documentaryâ€¦")
         Text("Status", style = MaterialTheme.typography.labelSmall, color = ZoneColors.secondary)
         LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             items(watchStatuses) { option ->
@@ -532,7 +532,7 @@ private fun WatchEditor(
             }
         }
         LabeledField("Where to watch", service, { service = it }, placeholder = "Streaming service")
-        LabeledField("Rating (0–10)", rating, { rating = it.filter { c -> c.isDigit() || c == '.' } }, placeholder = "0", keyboardType = KeyboardType.Number)
+        LabeledField("Rating (0â€“10)", rating, { rating = it.filter { c -> c.isDigit() || c == '.' } }, placeholder = "0", keyboardType = KeyboardType.Number)
         if (type == "Series") {
             Text("Seasons", style = MaterialTheme.typography.labelSmall, color = ZoneColors.secondary)
             seasons.forEachIndexed { index, season ->
